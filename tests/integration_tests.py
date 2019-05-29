@@ -36,6 +36,9 @@ class AsyncHTTPTestCase(testing.AsyncHTTPTestCase):
             'url': 'amqp://guest:guest@127.0.0.1:5672/%2f'})
         self.io_loop.start()
 
+    def tearDown(self):
+        self.io_loop.clear_current()
+
     def get_app(self):
         return web.Application(
             [(r'/', base.RequestHandler)],
